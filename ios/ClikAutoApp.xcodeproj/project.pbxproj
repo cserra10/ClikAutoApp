@@ -14,6 +14,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		3167637B7225057D27002B20 /* libPods-ClikAutoApp-ClikAutoAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBB257013EAA4703E01BF401 /* libPods-ClikAutoApp-ClikAutoAppTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		FAF54B9228E62773004D85BE /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = FAF54B9128E62773004D85BE /* AppCenter-Config.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		C6B955E4987E70AADC80A7D6 /* Pods-ClikAutoApp-ClikAutoAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClikAutoApp-ClikAutoAppTests.debug.xcconfig"; path = "Target Support Files/Pods-ClikAutoApp-ClikAutoAppTests/Pods-ClikAutoApp-ClikAutoAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E9E9355A1C4A00D99BD629CB /* Pods-ClikAutoApp-ClikAutoAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClikAutoApp-ClikAutoAppTests.release.xcconfig"; path = "Target Support Files/Pods-ClikAutoApp-ClikAutoAppTests/Pods-ClikAutoApp-ClikAutoAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		FAF54B9128E62773004D85BE /* AppCenter-Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +116,6 @@
 				C6B955E4987E70AADC80A7D6 /* Pods-ClikAutoApp-ClikAutoAppTests.debug.xcconfig */,
 				E9E9355A1C4A00D99BD629CB /* Pods-ClikAutoApp-ClikAutoAppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -128,6 +129,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				FAF54B9128E62773004D85BE /* AppCenter-Config.plist */,
 				13B07FAE1A68108700A75B9A /* ClikAutoApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* ClikAutoAppTests */,
@@ -245,6 +247,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				FAF54B9228E62773004D85BE /* AppCenter-Config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
