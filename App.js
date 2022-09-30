@@ -18,8 +18,10 @@ import {
   NativeBaseProvider,
   VStack,
   Box,
+  Button,
 } from 'native-base';
 import NativeBaseIcon from './src/components/NativeBaseIcon';
+import Crashes from 'appcenter-crashes';
 
 // Color Switch Component
 function ToggleDarkMode() {
@@ -66,6 +68,7 @@ const App = () => {
             </Text>
           </Link>
           <ToggleDarkMode />
+          <Button onPress={() => Crashes.generateTestCrash()}>Crash</Button>
         </VStack>
       </Center>
     </NativeBaseProvider>
