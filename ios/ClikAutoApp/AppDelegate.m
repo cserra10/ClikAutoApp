@@ -3,6 +3,10 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import <AppCenterReactNativeShared/AppCenterReactNativeShared.h>
+#import <AppCenterReactNative.h>
+#import <AppCenterReactNativeAnalytics.h>
+#import <AppCenterReactNativeCrashes.h>
 
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
@@ -47,6 +51,10 @@ static void InitializeFlipper(UIApplication *application) {
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+  [AppCenterReactNative register];
+  [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];
+  [AppCenterReactNativeCrashes registerWithAutomaticProcessing];
   return YES;
 }
 

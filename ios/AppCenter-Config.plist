@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+   AppCenter-Config.plist
+   ClikAutoApp
+
+   Created by Cesar Serrano on 29/09/22.
+   Copyright (c) 2022 ___ORGANIZATIONNAME___. All rights reserved.
+-->
+<plist version="1.0">
+<dict>
+  <key>AppSecret</key>
+  <string>bb5e8aa4-c232-4113-b399-ef22bdd1c59b</string>
+</dict>
+</plist>
