@@ -5,3 +5,6 @@ IOS
 
 Android
 [![Build status](https://build.appcenter.ms/v0.1/apps/9a16f46a-3272-4c78-a458-8e1c0019e1be/branches/main/badge)](https://appcenter.ms)
+
+
+React Native Application
