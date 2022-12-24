@@ -1,10 +1,11 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import useUser from 'src/hooks/useUser';
-import Login from 'src/screens/Login';
 
-function AuthGuard({ children }) {
+const Dashboard = () => {
   const { user, initializing } = useUser();
+  const navigations = useNavigation();
 
   if (initializing) {
     return (
@@ -15,11 +16,11 @@ function AuthGuard({ children }) {
   }
 
   if (user === null) {
-    return <Login />;
+    navigations.navigate('Login');
   }
-
-  return children;
+  return (
+    <View><Text>Dashboard {JSON.stringify(user)}</Text></View>
+  )
 }
 
-export default AuthGuard;
-
+export default Dashboard;

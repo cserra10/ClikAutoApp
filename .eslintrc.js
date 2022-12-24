@@ -36,5 +36,17 @@ module.exports = {
       }
     ],
     'import/no-unresolved': 0,
+    'react/jsx-first-prop-new-line': [2, 'multiline'],
+    'react/jsx-max-props-per-line': [
+      1,
+      { maximum: 1, when: 'multiline' },
+    ],
+    'react/jsx-indent-props': [2, 2],
+    'react/jsx-closing-bracket-location': [
+      2,
+      'tag-aligned',
+    ],
+    'react/jsx-props-no-spreading': 0,
+    'react/no-unescaped-entities': 0,
   },
 };
