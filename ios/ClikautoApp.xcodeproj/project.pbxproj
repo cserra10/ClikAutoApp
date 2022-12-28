@@ -15,6 +15,10 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		889EE80C0C550A716936A4CD /* libPods-ClikautoApp-ClikautoAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 903C89892C1CC51241139C17 /* libPods-ClikautoApp-ClikautoAppTests.a */; };
 		FA3092B3294DB75300299E9A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA3092B2294DB75300299E9A /* GoogleService-Info.plist */; };
+		FA3092CA295B900E00299E9A /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA3092BA295B900E00299E9A /* Feather.ttf */; };
+		FA3092CB295B900E00299E9A /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA3092BB295B900E00299E9A /* Entypo.ttf */; };
+		FA3092CD295B900E00299E9A /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA3092BD295B900E00299E9A /* MaterialCommunityIcons.ttf */; };
+		FA3092D7295B900E00299E9A /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA3092C7295B900E00299E9A /* MaterialIcons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +50,10 @@
 		903C89892C1CC51241139C17 /* libPods-ClikautoApp-ClikautoAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ClikautoApp-ClikautoAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FA3092B2294DB75300299E9A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "ClikautoApp/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FA3092BA295B900E00299E9A /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
+		FA3092BB295B900E00299E9A /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
+		FA3092BD295B900E00299E9A /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
+		FA3092C7295B900E00299E9A /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +126,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				FA3092B7295B900E00299E9A /* Fonts */,
 				FA3092B2294DB75300299E9A /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* ClikautoApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -149,6 +158,18 @@
 				89C6BE57DB24E9ADA2F236DE /* Pods-ClikautoApp-ClikautoAppTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		FA3092B7295B900E00299E9A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				FA3092BA295B900E00299E9A /* Feather.ttf */,
+				FA3092BB295B900E00299E9A /* Entypo.ttf */,
+				FA3092BD295B900E00299E9A /* MaterialCommunityIcons.ttf */,
+				FA3092C7295B900E00299E9A /* MaterialIcons.ttf */,
+			);
+			name = Fonts;
+			path = "../node_modules/react-native-vector-icons/Fonts";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,8 +267,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA3092D7295B900E00299E9A /* MaterialIcons.ttf in Resources */,
+				FA3092CB295B900E00299E9A /* Entypo.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				FA3092CA295B900E00299E9A /* Feather.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				FA3092CD295B900E00299E9A /* MaterialCommunityIcons.ttf in Resources */,
 				FA3092B3294DB75300299E9A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

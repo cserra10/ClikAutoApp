@@ -15,7 +15,9 @@ import {
   Box,
   Input,
   FormControl,
-  WarningOutlineIcon
+  WarningOutlineIcon,
+  IconButton,
+  Icon,
 } from 'native-base';
 import auth from '@react-native-firebase/auth';
 import { useForm, Controller } from 'react-hook-form';
@@ -25,6 +27,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import IconGoogle from 'src/icons/IconGoogle';
 import IconFacebook from 'src/icons/IconFacebook';
 import { useMutation } from 'react-query';
+import Feather from 'react-native-vector-icons/Feather';
 
 
 const schema = yup.object({
@@ -37,13 +40,17 @@ export function SignInForm({ props }) {
     resolver: yupResolver(schema),
   });
   const loginMutation = useMutation(({ username, password }) => auth().signInWithEmailAndPassword(username, password));
-  // const [showPassword, setShowPassword] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
 
   // const onSubmit = data => console.log(data);
 
   useEffect(() => {
     console.log(loginMutation);
   }, [loginMutation.data]);
+
+  const toggleShowPassword = () => {
+    setShowPassword(prev => !prev);
+  }
 
   return (
     <KeyboardAwareScrollView
@@ -98,6 +105,7 @@ export function SignInForm({ props }) {
                         placeholder="Username"
                         value={field.value}
                         onChangeText={field.onChange}
+                        height={9}
                       />
                       {!!fieldState.error && (
                         <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
@@ -118,9 +126,23 @@ export function SignInForm({ props }) {
                       <FormControl.Label>Password</FormControl.Label>
                       <Input
                         placeholder="Password"
-                        type="password"
+                        type={showPassword ? '' : 'password'}
                         value={field.value}
                         onChangeText={field.onChange}
+                        height={9}
+                        InputRightElement={
+                          <IconButton
+                            icon={
+                              <Icon
+                                size="4"
+                                color="coolGray.400"
+                                as={Feather}
+                                name={showPassword ? 'eye-off' : 'eye'}
+                              />
+                            }
+                            onPress={toggleShowPassword}
+                          />
+                        }
                       />
                       {!!fieldState.error && (
                         <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
