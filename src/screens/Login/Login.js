@@ -360,10 +360,7 @@ export default function SignIn(props) {
           maxW={{
             md: '1016px',
           }}
-          flex={{
-            base: '1',
-            md: '1',
-          }}
+          flex="1"
           space="8"
         >
           <Hidden from="md">

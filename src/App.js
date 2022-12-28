@@ -2,9 +2,11 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { QueryClient, QueryClientProvider, focusManager } from 'react-query';
 import { NativeBaseProvider, extendTheme, theme as nbTheme } from 'native-base';
+import { Provider } from 'react-redux';
 import MainStackNavigator from 'src/Navigator';
 import useOnlineManager from 'src/hooks/useOnlineManager';
 import useAppState from 'src/hooks/useAppState';
+import store from 'src/redux/store';
 
 const theme = extendTheme({
   colors: {
@@ -28,11 +30,13 @@ const App = () => {
   useAppState(onAppStateChange);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <NativeBaseProvider theme={theme}>
-        <MainStackNavigator />
-      </NativeBaseProvider>
-    </QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <NativeBaseProvider theme={theme}>
+          <MainStackNavigator />
+        </NativeBaseProvider>
+      </QueryClientProvider>
+    </Provider>
   );
 }
 

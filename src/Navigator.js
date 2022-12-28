@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator();
 const RootStackNavigator = () => (
   <AuthGuard>
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen
           name="Dashboard"
           component={Dashboard}

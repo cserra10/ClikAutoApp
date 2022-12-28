@@ -16,6 +16,7 @@
     "@react-native-firebase/auth": "^16.5.0",
     "@react-navigation/native": "^6.1.1",
     "@react-navigation/native-stack": "^6.9.7",
+    "@reduxjs/toolkit": "^1.9.1",
     "native-base": "^3.4.25",
     "react": "18.1.0",
     "react-hook-form": "^7.41.0",
@@ -26,6 +27,7 @@
     "react-native-svg": "12.1.1",
     "react-native-vector-icons": "^9.2.0",
     "react-query": "^3.39.2",
+    "react-redux": "^8.0.5",
     "yup": "^0.32.11"
   },
   "devDependencies": {
