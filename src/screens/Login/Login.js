@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   HStack,
@@ -18,6 +18,8 @@ import {
   WarningOutlineIcon,
   IconButton,
   Icon,
+  Spinner,
+  Modal
 } from 'native-base';
 import auth from '@react-native-firebase/auth';
 import { useForm, Controller } from 'react-hook-form';
@@ -29,24 +31,17 @@ import IconFacebook from 'src/icons/IconFacebook';
 import { useMutation } from 'react-query';
 import Feather from 'react-native-vector-icons/Feather';
 
-
 const schema = yup.object({
-  username: yup.string().required(),
-  password: yup.string().required(),
+  email: yup.string().email('Enter a valid email').required('Required'),
+  password: yup.string().required('Required'),
 }).required();
 
 export function SignInForm({ props }) {
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
-  const loginMutation = useMutation(({ username, password }) => auth().signInWithEmailAndPassword(username, password));
-  const [showPassword, setShowPassword] = React.useState(false);
-
-  // const onSubmit = data => console.log(data);
-
-  useEffect(() => {
-    console.log(loginMutation);
-  }, [loginMutation.data]);
+  const loginMutation = useMutation(({ email, password }) => auth().signInWithEmailAndPassword(email, password));
+  const [showPassword, setShowPassword] = useState(false);
 
   const toggleShowPassword = () => {
     setShowPassword(prev => !prev);
@@ -95,24 +90,22 @@ export function SignInForm({ props }) {
           <VStack space="4">
             <VStack space="4">
               <Controller
-                name="username"
+                name="email"
                 control={control}
                 render={({ field, fieldState }) => (
-                  <FormControl isRequired width="100%">
-                    <Stack>
-                      <FormControl.Label>Username</FormControl.Label>
-                      <Input
-                        placeholder="Username"
-                        value={field.value}
-                        onChangeText={field.onChange}
-                        height={9}
-                      />
-                      {!!fieldState.error && (
-                        <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
-                          {fieldState.error.message}
-                        </FormControl.ErrorMessage>
-                      )}
-                    </Stack>
+                  <FormControl isRequired isInvalid={!!fieldState.error}>
+                    <FormControl.Label>Email</FormControl.Label>
+                    <Input
+                      placeholder="email"
+                      value={field.value}
+                      onChangeText={field.onChange}
+                      height={9}
+                    />
+                    {!!fieldState.error && (
+                      <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
+                        {fieldState.error.message}
+                      </FormControl.ErrorMessage>
+                    )}
                   </FormControl>
                 )}
               />
@@ -121,35 +114,33 @@ export function SignInForm({ props }) {
                 name="password"
                 control={control}
                 render={({ field, fieldState }) => (
-                  <FormControl isRequired>
-                    <Stack>
-                      <FormControl.Label>Password</FormControl.Label>
-                      <Input
-                        placeholder="Password"
-                        type={showPassword ? '' : 'password'}
-                        value={field.value}
-                        onChangeText={field.onChange}
-                        height={9}
-                        InputRightElement={
-                          <IconButton
-                            icon={
-                              <Icon
-                                size="4"
-                                color="coolGray.400"
-                                as={Feather}
-                                name={showPassword ? 'eye-off' : 'eye'}
-                              />
-                            }
-                            onPress={toggleShowPassword}
-                          />
-                        }
-                      />
-                      {!!fieldState.error && (
-                        <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
-                          {fieldState.error.message}
-                        </FormControl.ErrorMessage>
-                      )}
-                    </Stack>
+                  <FormControl isRequired isInvalid={!!fieldState.error}>
+                    <FormControl.Label>Password</FormControl.Label>
+                    <Input
+                      placeholder="Password"
+                      type={showPassword ? '' : 'password'}
+                      value={field.value}
+                      onChangeText={field.onChange}
+                      height={9}
+                      InputRightElement={
+                        <IconButton
+                          icon={
+                            <Icon
+                              size="4"
+                              color="coolGray.400"
+                              as={Feather}
+                              name={showPassword ? 'eye-off' : 'eye'}
+                            />
+                          }
+                          onPress={toggleShowPassword}
+                        />
+                      }
+                    />
+                    {!!fieldState.error && (
+                      <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
+                        {fieldState.error.message}
+                      </FormControl.ErrorMessage>
+                    )}
                   </FormControl>
                 )}
               />
@@ -210,6 +201,7 @@ export function SignInForm({ props }) {
                   bg: 'primary.700',
                 }}
                 onPress={handleSubmit(loginMutation.mutate)}
+                disabled={loginMutation.isLoading}
               >
                 SIGN IN
               </Button>
@@ -308,6 +300,24 @@ export function SignInForm({ props }) {
             Sign up
           </Link>
         </HStack>
+
+        <Modal isOpen={loginMutation.isLoading}>
+          <Spinner />
+        </Modal>
+
+        <Modal isOpen={loginMutation.isError}>
+          <Modal.Content>
+            <Modal.Header>Error</Modal.Header>
+            <Modal.Body>
+              <Text>{loginMutation?.error?.message}</Text>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button flex="1" onPress={loginMutation.reset}>
+                Ok
+              </Button>
+            </Modal.Footer>
+          </Modal.Content>
+        </Modal>
       </VStack>
     </KeyboardAwareScrollView>
   );

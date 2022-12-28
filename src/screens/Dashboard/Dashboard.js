@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Button, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
 import useUser from 'src/hooks/useUser';
 
 const Dashboard = () => {
@@ -19,7 +20,10 @@ const Dashboard = () => {
     navigations.navigate('Login');
   }
   return (
-    <View><Text>Dashboard {JSON.stringify(user)}</Text></View>
+    <View>
+      <Text>Dashboard {JSON.stringify(user)}</Text>
+      <Button title="Logout" onPress={() => auth().signOut()} />
+    </View>
   )
 }
 
