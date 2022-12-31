@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, View } from 'native-base';
+import { View, Button, Text } from 'native-base';
+import auth from '@react-native-firebase/auth';
 
 const Home = () => {
   const z = 2;
@@ -7,6 +8,9 @@ const Home = () => {
   return (
     <View>
       <Text>Home</Text>
+      <Button onPress={() => auth().signOut()}>
+        Logout
+      </Button>
     </View>
   );
 }

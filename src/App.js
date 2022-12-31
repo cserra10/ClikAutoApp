@@ -9,13 +9,30 @@ import useAppState from 'src/hooks/useAppState';
 import store from 'src/redux/store';
 
 const theme = extendTheme({
-  colors: {
-    primary: nbTheme.colors.violet,
-  },
+  // colors: {
+  //   'primary': {
+  //     '50': '#86e9ff',
+  //     '100': '#5fe0fd',
+  //     '200': '#3ed5f7',
+  //     '300': '#1fc8ee',
+  //     '400': '#10b1d7',
+  //     '500': '#159bb9',
+  //     '600': '#18869f',
+  //     '700': '#197285',
+  //     '800': '#1a5e6e',
+  //     '900': '#194c57'
+  //   },
+  // },
 });
 
+
 const queryClient = new QueryClient({
-  defaultOptions: { queries: { retry: 2 } },
+  defaultOptions: {
+    queries: {
+      retry: 2,
+      staleTime: 1000  * 60 * 24
+    }
+  },
 });
 
 

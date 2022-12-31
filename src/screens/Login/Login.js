@@ -10,9 +10,7 @@ import {
   Pressable,
   Center,
   Hidden,
-  StatusBar,
   Stack,
-  Box,
   Input,
   FormControl,
   WarningOutlineIcon,
@@ -26,10 +24,11 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import Feather from 'react-native-vector-icons/Feather';
+import { useMutation } from 'react-query';
 import IconGoogle from 'src/icons/IconGoogle';
 import IconFacebook from 'src/icons/IconFacebook';
-import { useMutation } from 'react-query';
-import Feather from 'react-native-vector-icons/Feather';
+import Screen from 'src/components/Screen';
 
 const schema = yup.object({
   email: yup.string().email('Enter a valid email').required('Required'),
@@ -96,7 +95,7 @@ export function SignInForm({ props }) {
                   <FormControl isRequired isInvalid={!!fieldState.error}>
                     <FormControl.Label>Email</FormControl.Label>
                     <Input
-                      placeholder="email"
+                      placeholder="Email"
                       value={field.value}
                       onChangeText={field.onChange}
                       height={9}
@@ -153,16 +152,6 @@ export function SignInForm({ props }) {
                   fontWeight: 'bold',
                   textDecoration: 'none',
                 }}
-                _light={{
-                  _text: {
-                    color: 'primary.900',
-                  },
-                }}
-                _dark={{
-                  _text: {
-                    color: 'primary.500',
-                  },
-                }}
               >
                 Forgot password?
               </Link>
@@ -174,16 +163,7 @@ export function SignInForm({ props }) {
                 colorScheme="primary"
                 accessibilityLabel="Remember me"
               >
-                <Text
-                  pl="3"
-                  fontWeight="normal"
-                  _light={{
-                    color: 'coolGray.800',
-                  }}
-                  _dark={{
-                    color: 'coolGray.400',
-                  }}
-                >
+                <Text pl="3">
                   Remember me and keep me logged in
                 </Text>
               </Checkbox>
@@ -193,12 +173,6 @@ export function SignInForm({ props }) {
                 borderRadius="4"
                 _text={{
                   fontWeight: 'medium',
-                }}
-                _light={{
-                  bg: 'primary.900',
-                }}
-                _dark={{
-                  bg: 'primary.700',
                 }}
                 onPress={handleSubmit(loginMutation.mutate)}
                 disabled={loginMutation.isLoading}
@@ -211,34 +185,12 @@ export function SignInForm({ props }) {
                 alignItems="center"
                 justifyContent="center"
               >
-                <Divider
-                  w="30%"
-                  _light={{
-                    bg: 'coolGray.200',
-                  }}
-                  _dark={{
-                    bg: 'coolGray.700',
-                  }}
-                />
-                <Text
-                  fontWeight="medium"
-                  _light={{
-                    color: 'coolGray.300',
-                  }}
-                  _dark={{
-                    color: 'coolGray.500',
-                  }}
-                >
+                <Divider w="30%" />
+                <Text fontWeight="medium">
                   or
                 </Text>
                 <Divider
                   w="30%"
-                  _light={{
-                    bg: 'coolGray.200',
-                  }}
-                  _dark={{
-                    bg: 'coolGray.700',
-                  }}
                 />
               </HStack>
             </VStack>
@@ -266,14 +218,7 @@ export function SignInForm({ props }) {
             md: '8',
           }}
         >
-          <Text
-            _light={{
-              color: 'coolGray.800',
-            }}
-            _dark={{
-              color: 'coolGray.400',
-            }}
-          >
+          <Text>
             Don't have an account?
           </Text>
 
@@ -282,16 +227,6 @@ export function SignInForm({ props }) {
             _text={{
               fontWeight: 'bold',
               textDecoration: 'none',
-            }}
-            _light={{
-              _text: {
-                color: 'primary.900',
-              },
-            }}
-            _dark={{
-              _text: {
-                color: 'primary.500',
-              },
             }}
             onPress={() => {
               props.navigation.navigate('SignUp');
@@ -325,30 +260,10 @@ export function SignInForm({ props }) {
 
 export default function SignIn(props) {
   return (
-    <>
-      <StatusBar
-        translucent
-        backgroundColor="transparent"
-        barStyle="light-content"
-      />
-
-      <Box
-        safeAreaTop
-        _light={{
-          bg: 'primary.900',
-        }}
-        _dark={{
-          bg: 'coolGray.900',
-        }}
-      />
-
+    <Screen>
       <Center
-        _dark={{
-          bg: 'coolGray.900',
-        }}
-        _light={{
-          bg: 'primary.900',
-        }}
+        _light={{ bg: 'primary.600' }}
+        _dark={{ bg: 'coolGray.900' }}
         flex="1"
       >
         <Stack
@@ -365,7 +280,7 @@ export default function SignIn(props) {
         >
           <Hidden from="md">
             <VStack px="8" space="8">
-              <Text color="coolGray.50" fontSize="lg">
+              <Text color="white" fontSize="lg">
                 Sign In
               </Text>
               <VStack>
@@ -379,7 +294,7 @@ export default function SignIn(props) {
                     color: 'coolGray.400',
                   }}
                   _light={{
-                    color: 'primary.300',
+                    color: 'white',
                   }}
                 >
                   Sign in to continue
@@ -391,6 +306,6 @@ export default function SignIn(props) {
           <SignInForm props={props} />
         </Stack>
       </Center>
-    </>
+    </Screen>
   );
 }
