@@ -6,46 +6,49 @@ import {
 } from 'native-base';
 import Filters from 'src/components/Filters';
 import { useSelector } from 'react-redux';
-
-const Vehicles = () => null;
+import VehicleList from 'src/components/VehicleList';
 
 const Search = () => {
-  const [showFilters, setShowFilters] = useState(true);
-  const { makers, modelsByMaker } = useSelector(s => s.filters);
-
-  console.log(JSON.stringify({ makers, modelsByMaker }, null, 3));
+  const [showFilters, setShowFilters] = useState(false);
   const toggleFilters = () => setShowFilters(prev => !prev);
 
+  const filtersModal = (
+    <Modal
+      isOpen={showFilters}
+      size="xl"
+    >
+      <Modal.Content>
+        <Modal.Header>
+          Filters
+        </Modal.Header>
+        <Modal.Body p="0" >
+          <Filters />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button.Group>
+            <Button
+              variant="ghost"
+              colorScheme="blueGray"
+              onPress={toggleFilters}
+            >
+              Cancel
+            </Button>
+            <Button onPress={toggleFilters}>
+              Apply
+            </Button>
+          </Button.Group>
+        </Modal.Footer>
+      </Modal.Content>
+    </Modal>
+  );
+
   return (
-    <VStack>
+    <VStack px="4">
       <Button onPress={toggleFilters}>
         Show Filters
       </Button>
-      <Modal isOpen={showFilters}>
-        <Modal.Content>
-          <Modal.Header>
-            Filters
-          </Modal.Header>
-          <Modal.Body p="0" >
-            <Filters />
-          </Modal.Body>
-          <Modal.Footer>
-            <Button.Group>
-              <Button
-                variant="ghost"
-                colorScheme="blueGray"
-                onPress={toggleFilters}
-              >
-                Cancel
-              </Button>
-              <Button onPress={toggleFilters}>
-                Apply
-              </Button>
-            </Button.Group>
-          </Modal.Footer>
-        </Modal.Content>
-      </Modal>
-      <Vehicles />
+      {filtersModal}
+      <VehicleList />
     </VStack>
   );
 }
