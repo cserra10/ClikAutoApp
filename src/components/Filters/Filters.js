@@ -1,4 +1,4 @@
-import React, { useState, memo, useCallback } from 'react';
+import React, { useState, memo } from 'react';
 import { useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
 import Feather from 'react-native-vector-icons/Feather';

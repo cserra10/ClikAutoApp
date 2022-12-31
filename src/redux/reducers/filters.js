@@ -16,6 +16,9 @@ const filtersSlice = createSlice({
     },
 
     toggleMake(state, action) {
+      if (state.makers.includes(action.payload)) {
+        state.modelsByMaker[action.payload] = ''
+      }
       state.makers = toggleValueFromString(action.payload, state.makers);
     },
 
@@ -30,15 +33,8 @@ const filtersSlice = createSlice({
         [maker]: toggleValueFromString(model, state.modelsByMaker[maker])
       };
     },
-
-    resetModels(state, action) {
-      state.modelsByMaker = {
-        ...state.modelsByMaker,
-        [action.payload]: ''
-      };
-    },
   }
 })
 
-export const { setFilter, toggleModel, toggleMake, resetModels } = filtersSlice.actions;
+export const { setFilter, toggleModel, toggleMake } = filtersSlice.actions;
 export default filtersSlice.reducer;

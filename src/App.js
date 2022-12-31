@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { QueryClient, QueryClientProvider, focusManager } from 'react-query';
-import { NativeBaseProvider, extendTheme, theme as nbTheme } from 'native-base';
+import { NativeBaseProvider, extendTheme } from 'native-base';
 import { Provider } from 'react-redux';
 import MainStackNavigator from 'src/Navigator';
 import useOnlineManager from 'src/hooks/useOnlineManager';

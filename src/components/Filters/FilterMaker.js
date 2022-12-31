@@ -3,7 +3,7 @@ import { Box, Checkbox, HStack, Icon, Pressable, Text, VStack } from 'native-bas
 import Feather from 'react-native-vector-icons/Feather';
 import Collapsible from 'react-native-collapsible';
 import { titleCaps } from 'src/utils';
-import { toggleMake, resetModels } from 'src/redux/reducers/filters';
+import { toggleMake } from 'src/redux/reducers/filters';
 import { useDispatch, useSelector } from 'react-redux';
 import FiltersModel from './FiltersModel';
 
@@ -19,14 +19,6 @@ const FilterMaker = ({ makers = [] }) => {
     }))
   };
 
-  const toggleSelected = (maker) => () => {
-    if (selectedMakers?.includes(maker)) {
-      dispatch(resetModels(maker));
-    }
-    dispatch(toggleMake(maker));
-  };
-
-
   return (
     <VStack>
       {makers.map((maker) => (
@@ -38,10 +30,10 @@ const FilterMaker = ({ makers = [] }) => {
                 p="2"
                 bgColor={ isPressed ? 'muted.100' : 'white'}
               >
-                <Text flex="1">{titleCaps(maker.name)} {selectedMakers.includes(maker.name) ? 'true' : 'false'}</Text>
+                <Text flex="1">{titleCaps(maker.name)}</Text>
                 <Checkbox
                   isChecked={selectedMakers.includes(maker.name)}
-                  onChange={toggleSelected(maker.name)}
+                  onChange={() => dispatch(toggleMake(maker.name))}
                   accessibilityLabel="Select"
                   mr="2"
                   size="sm"
