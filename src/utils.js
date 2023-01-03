@@ -45,3 +45,21 @@ export const formatLargeTransmission = (value = '') => {
   }
   return null
 }
+
+
+export const getVehicleStatus = (vehicle) => {
+  if (!vehicle) return ''
+
+  if (`${vehicle.status}`.toLowerCase().includes('hold')) {
+    return 'HOLD'
+  }
+  if (`${vehicle.status}`.toLowerCase().includes('available')) {
+    return 'AVAILABLE'
+  }
+  if (`${vehicle.status}`.toLowerCase().includes('archived')) {
+    return 'ARCHIVED'
+  }
+  if (`${vehicle.status}`.toLowerCase().includes('discount')) {
+    return 'WITH_DISCOUNT'
+  }
+}

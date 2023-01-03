@@ -1,8 +1,34 @@
 import React, { memo } from 'react';
-import { AspectRatio, Box, Image, Stack, Heading, Text, Skeleton } from 'native-base';
+import { AspectRatio, Box, Image, Stack, Heading, Text, Skeleton, Icon, IconButton, Center } from 'native-base';
 import { NumericFormat } from 'react-number-format';
 import { IMAGES_URL } from '@env';
-import { formatLargeTransmission, titleCaps } from '../../utils';
+import Feather from 'react-native-vector-icons/Feather';
+import { formatLargeTransmission, getVehicleStatus, titleCaps } from 'src/utils';
+
+
+const VehicleStatus = ({ vehicle }) => {
+  const status = getVehicleStatus(vehicle);
+  let bgColor = 'primary.600';
+  if (status === 'AVAILABLE') {
+    bgColor = 'green.600'
+  }
+
+  return (
+    <Box
+      py="1"
+      px="2"
+      bgColor={bgColor}
+    >
+      <Text
+        fontSize="xs"
+        color="white"
+        bold
+      >
+        {titleCaps(status)}
+      </Text>
+    </Box>
+  )
+}
 
 const VehicleCard = ({ vehicle, skeleton }) => {
   if (skeleton) {
@@ -27,14 +53,36 @@ const VehicleCard = ({ vehicle, skeleton }) => {
       mb="4"
       shadow="2"
     >
-      <AspectRatio w="100%" ratio={9/6}>
-        <Image
-          source={{
-            uri: `${IMAGES_URL}/500x300max/filters:format(webp)/${vehicle?.images?.[0]?.filename}`,
-          }}
-          alt="image"
+      <Box>
+        <AspectRatio w="100%" ratio={9/6}>
+          <Image
+            source={{
+              uri: `${IMAGES_URL}/500x300max/filters:format(webp)/${vehicle?.images?.[0]?.filename}`,
+            }}
+            alt="image"
+          />
+        </AspectRatio>
+        <Center
+          position="absolute"
+          bottom="0"
+        >
+          <VehicleStatus vehicle={vehicle} />
+        </Center>
+        <IconButton
+          position="absolute"
+          right="2"
+          top="2"
+          backgroundColor="white"
+          icon={
+            <Icon
+              size="4"
+              color="primary.600"
+              as={Feather}
+              name="heart"
+            />
+          }
         />
-      </AspectRatio>
+      </Box>
       <Stack p="3" space={3}>
         <Stack space={2}>
           <Heading size="md">
