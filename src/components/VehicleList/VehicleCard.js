@@ -1,71 +1,73 @@
 import React, { memo } from 'react';
-import { AspectRatio, Box, Image, Center, Stack, Heading, Text } from 'native-base';
+import { AspectRatio, Box, Image, Stack, Heading, Text, Skeleton } from 'native-base';
+import { NumericFormat } from 'react-number-format';
 import { IMAGES_URL } from '@env';
+import { formatLargeTransmission, titleCaps } from '../../utils';
 
-const VehicleCard = ({ vehicle }) => (
-  <Box
-    rounded="lg"
-    overflow="hidden"
-    shadow="2"
-    _dark={{
-      borderColor: 'coolGray.600',
-      backgroundColor: 'gray.700'
-    }}
-    _light={{
-      backgroundColor: 'gray.50'
-    }}
-    mb="4"
-  >
-    <Box>
-      <AspectRatio w="100%" ratio={16 / 9}>
+const VehicleCard = ({ vehicle, skeleton }) => {
+  if (skeleton) {
+    return (
+      <Skeleton height={40} />
+    )
+  }
+
+  return (
+    <Box
+      rounded="lg"
+      overflow="hidden"
+      _dark={{
+        borderColor: 'coolGray.600',
+        backgroundColor: 'gray.700'
+      }}
+      // _light={{
+      //   backgroundColor: 'coolGray.300',
+      // }}
+      borderColor="gray.50"
+      borderWidth="1"
+      mb="4"
+      shadow="2"
+    >
+      <AspectRatio w="100%" ratio={9/6}>
         <Image
           source={{
-            uri: `${IMAGES_URL}/300x200max/filters:format(webp)/${vehicle?.images?.[0]?.filename}`
+            uri: `${IMAGES_URL}/500x300max/filters:format(webp)/${vehicle?.images?.[0]?.filename}`,
           }}
           alt="image"
         />
       </AspectRatio>
-      <Center
-        bg="violet.500"
-        _dark={{
-          bg: 'violet.400'
-        }}
-        _text={{
-          color: 'warmGray.50',
-          fontWeight: '700',
-          fontSize: 'xs'
-        }}
-        position="absolute"
-        bottom="0"
-        px="3"
-        py="1.5"
-      >
-        PHOTOS
-      </Center>
-    </Box>
+      <Stack p="3" space={3}>
+        <Stack space={2}>
+          <Heading size="md">
+            {titleCaps(`${vehicle.maker} ${vehicle.model}`)}
+          </Heading>
+          <Text fontSize="xs" mt={-1}>
+            {vehicle.year}
+            {' | '}
+            <NumericFormat
+              displayType="text"
+              value={vehicle.mileage}
+              renderText={value => value}
+              thousandSeparator
+              suffix=" Km"
+            />
+            {' | '}
+            {formatLargeTransmission(vehicle.transmission)}
+          </Text>
 
-    <Stack p="4" space={3}>
-      <Stack space={2}>
-        <Heading size="md" ml="-1">
-          {vehicle.maker} {vehicle.mode} {vehicle.year}
-        </Heading>
-        <Text
-          fontSize="xs"
-          _light={{
-            color: 'violet.500'
-          }}
-          _dark={{
-            color: 'violet.400'
-          }}
-          fontWeight="500"
-          ml="-0.5"
-          mt="-1"
-        >
-          {vehicle.price}
-        </Text>
+          <Text fontSize="xs" color="primary.600">
+            <NumericFormat
+              displayType="text"
+              value={vehicle.price}
+              renderText={value => value}
+              thousandSeparator
+              decimalScale={0}
+              prefix="$"
+            />
+          </Text>
+        </Stack>
       </Stack>
-    </Stack>
-  </Box>
-  );
+    </Box>
+  )
+};
 
 export default memo(VehicleCard);

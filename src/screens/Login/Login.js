@@ -38,13 +38,17 @@ const schema = yup.object({
 export function SignInForm({ props }) {
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: {
+      email: 'cesr90@gmail.com',
+      password: '12345678'
+    }
   });
   const loginMutation = useMutation(({ email, password }) => auth().signInWithEmailAndPassword(email, password));
   const [showPassword, setShowPassword] = useState(false);
 
   const toggleShowPassword = () => {
     setShowPassword(prev => !prev);
-  }
+  };
 
   return (
     <KeyboardAwareScrollView
@@ -99,6 +103,7 @@ export function SignInForm({ props }) {
                       value={field.value}
                       onChangeText={field.onChange}
                       height={9}
+                      autoCapitalize="none"
                     />
                     {!!fieldState.error && (
                       <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>

@@ -60,7 +60,7 @@ const Dashboard = () => {
         {sections.map((menuItem, index) => (
           <Pressable
             key={menuItem.label}
-            py="3"
+            pt="2"
             cursor="pointer"
             flex={1}
             onPress={() => setSelected(index)}
@@ -75,7 +75,6 @@ const Dashboard = () => {
               />
               <Text
                 color={index === selected ? 'primary.900' : 'text.400'}
-                fontSize="13"
                 bold
               >
                 {menuItem.label}

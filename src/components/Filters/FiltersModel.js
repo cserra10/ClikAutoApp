@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { useQuery } from 'react-query';
-import { Button, HStack, Text, Skeleton } from 'native-base';
+import { Button, HStack, Skeleton } from 'native-base';
 import { useDispatch, useSelector } from 'react-redux';
 import { titleCaps } from 'src/utils';
 import useAxios from 'src/hooks/useAxios';

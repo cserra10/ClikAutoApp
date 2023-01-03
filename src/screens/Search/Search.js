@@ -5,11 +5,10 @@ import {
   Modal,
 } from 'native-base';
 import Filters from 'src/components/Filters';
-import { useSelector } from 'react-redux';
 import VehicleList from 'src/components/VehicleList';
 
 const Search = () => {
-  const [showFilters, setShowFilters] = useState(true);
+  const [showFilters, setShowFilters] = useState(false);
   const toggleFilters = () => setShowFilters(prev => !prev);
 
   const filtersModal = (
@@ -43,12 +42,15 @@ const Search = () => {
   );
 
   return (
-    <VStack px="4">
-      <Button onPress={toggleFilters}>
+    <VStack
+      bgColor="white"
+      flex="1"
+    >
+        <Button onPress={toggleFilters} variant="ghost">
         Show Filters
-      </Button>
-      {filtersModal}
-      <VehicleList />
+        </Button>
+        {filtersModal}
+       <VehicleList />
     </VStack>
   );
 }

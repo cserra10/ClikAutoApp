@@ -2,27 +2,49 @@ import React, { memo } from 'react';
 import { useQuery } from 'react-query';
 import useAxios from 'src/hooks/useAxios';
 import { useSelector } from 'react-redux';
-import { FlatList, Text } from 'native-base';
+import { FlatList, Skeleton } from 'native-base';
+import pickBy from 'lodash/pickBy';
 import VehicleCard from './VehicleCard';
 
 const VehicleList = () => {
   const api = useAxios();
-  const { makers, modelsMyMaker } = useSelector(s => s.filters);
+  const { perPage, makers, modelsByMaker } = useSelector(s => s.filters);
+  const params =  pickBy({
+    perPage,
+    maker: makers,
+    model: Object.values(modelsByMaker).filter(item => !!item).join(','),
+  });
+
   const query = useQuery(
-    ['vehicles', []],
-    () => api.get('inventory', { params: {} })
-  )
+    ['vehicles', [params]],
+    () => api.get('inventory', { params }),
+    {
+      keepPreviousData: true,
+    }
+  );
 
-  const vehicles = query?.data?.data?.inventory ?? [];
+  const vehicles =
+    query.isSuccess ? query?.data?.data?.inventory :
+    query.isLoading ? [1,2,3] : [];
 
-  console.log(query, vehicles);
-
-  return query.isSuccess ? (
+  return (
     <FlatList
+      p="4"
       data={vehicles}
-      renderItem={({ item }) => <VehicleCard vehicle={item} />}
+      renderItem={({ item }) => query.isSuccess ? (
+          <VehicleCard
+            vehicle={item}
+            loading={query.isLoading}
+          />
+        ) : query.isLoading ? (
+          <Skeleton
+            height="64"
+            mb="4"
+            rounded="lg"
+          />
+        ) : null}
     />
-  ) : <Text>{query.status}</Text>;
+  )
 };
 
 export default memo(VehicleList);

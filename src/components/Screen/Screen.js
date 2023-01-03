@@ -8,6 +8,7 @@ const Screen = ({ children }) => (
       backgroundColor="transparent"
       barStyle="light-content"
     />
+
     <VStack
       bgColor="primary.600"
       flex="1"

@@ -14,14 +14,34 @@ export const titleCaps = (title, lowercaseFirst = true) => {
 };
 
 export const toggleValueFromString = (value, string = '') => {
-  const stringAsArray = string ? string.split('_') : []
-  console.log('stringAsArray', stringAsArray);
-  const index = stringAsArray.indexOf(value)
+  const stringAsArray = string ? string.split(',') : []
+  const index = stringAsArray.indexOf(value);
   if (index > -1) {
     stringAsArray.splice(index, 1)
   } else {
     stringAsArray.push(value)
   }
   stringAsArray.sort()
-  return stringAsArray.length ? stringAsArray.join('_') : ''
+  return stringAsArray.length ? stringAsArray.join(',') : ''
+}
+
+export const formatLargeTransmission = (value = '') => {
+  const val = String(value).toLowerCase()
+  if (val.includes('aut')
+    || val === 'steptronic'
+    || val === 'dsg'
+    || val === 's tronic'
+    || val === 'pdk'
+    || val === 'edc'
+    || val === 'twinami'
+    || val === 'tct'
+    || val === 'powershift'
+    || val === 'cvt'
+  ) {
+    return 'Automatic'
+  }
+  if (val.includes('man')) {
+    return 'Manual'
+  }
+  return null
 }
