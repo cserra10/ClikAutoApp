@@ -1,5 +1,5 @@
-import React, { useState, memo } from 'react';
-import { Box, Checkbox, HStack, Icon, Pressable, Text, VStack } from 'native-base';
+import React, { memo } from 'react';
+import { Box, HStack, Icon, Pressable, Text, VStack } from 'native-base';
 import Feather from 'react-native-vector-icons/Feather';
 import Collapsible from 'react-native-collapsible';
 import { titleCaps } from 'src/utils';
@@ -10,53 +10,47 @@ import FiltersModel from './FiltersModel';
 const FilterMaker = ({ makers = [] }) => {
   const dispatch = useDispatch();
   const selectedMakers = useSelector(s => s.filters.makers);
-  const [open, setOpen] = useState({});
 
-  const toggleOpen = (maker) => () => {
-    setOpen(prev => ({
-      ...prev,
-      [maker]: !prev[maker],
-    }))
+  const handleToggleMaker = (makerName) => () => {
+    dispatch(toggleMake(makerName));
   };
 
   return (
     <VStack>
-      {makers.map((maker) => (
-        <Box key={maker.name}>
-          <Pressable onPress={toggleOpen(maker.name)}>
-            {({ isPressed }) => (
-              <HStack
-                alignItems="center"
-                p="2"
-                bgColor={ isPressed ? 'muted.100' : 'white'}
-              >
-                <Text flex="1">{titleCaps(maker.name)}</Text>
-                <Checkbox
-                  isChecked={selectedMakers.includes(maker.name)}
-                  onChange={() => dispatch(toggleMake(maker.name))}
-                  accessibilityLabel="Select"
-                  mr="2"
-                  size="sm"
+      {makers.map((maker) => {
+        const selected = selectedMakers.includes(maker.name);
+        return (
+          <Box key={maker.name}>
+            <Pressable onPress={handleToggleMaker(maker.name)}>
+              {({ isPressed }) => (
+                <HStack
+                  alignItems="center"
+                  p="2"
+                  bgColor={ selected ? 'primary.600' : isPressed ? 'muted.100' : 'white'}
+                >
+                  <Text flex="1" color={selected ? 'white' : undefined}>{titleCaps(maker.name)}</Text>
+                  {selected && (
+                    <Icon
+                      size="4"
+                      color="white"
+                      as={Feather}
+                      name='check'
+                    />
+                  )}
+                </HStack>
+              )}
+            </Pressable>
+            <Collapsible collapsed={!selected}>
+              <Box pt="2" minH={60}>
+                <FiltersModel
+                  maker={maker.name}
+                  enabled={selected}
                 />
-                <Icon
-                  size="4"
-                  color="coolGray.400"
-                  as={Feather}
-                  name={open[maker.name] ? 'chevron-up' : 'chevron-down'}
-                />
-              </HStack>
-            )}
-          </Pressable>
-          <Collapsible collapsed={!open[maker.name]}>
-            <Box p="2">
-              <FiltersModel
-                maker={maker.name}
-                enabled={!!open[maker.name]}
-              />
-            </Box>
-          </Collapsible>
-        </Box>
-      ))}
+              </Box>
+            </Collapsible>
+          </Box>
+        )
+      })}
     </VStack>
   );
 }

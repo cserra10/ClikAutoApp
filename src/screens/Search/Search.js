@@ -9,13 +9,13 @@ import { useSelector } from 'react-redux';
 import VehicleList from 'src/components/VehicleList';
 
 const Search = () => {
-  const [showFilters, setShowFilters] = useState(false);
+  const [showFilters, setShowFilters] = useState(true);
   const toggleFilters = () => setShowFilters(prev => !prev);
 
   const filtersModal = (
     <Modal
       isOpen={showFilters}
-      size="xl"
+      size="lg"
     >
       <Modal.Content>
         <Modal.Header>

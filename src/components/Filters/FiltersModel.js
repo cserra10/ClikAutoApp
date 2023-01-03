@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { useQuery } from 'react-query';
-import { Button, HStack, Text } from 'native-base';
+import { Button, HStack, Text, Skeleton } from 'native-base';
 import { useDispatch, useSelector } from 'react-redux';
 import { titleCaps } from 'src/utils';
 import useAxios from 'src/hooks/useAxios';
@@ -10,31 +10,33 @@ const FiltersModel = ({ maker, enabled }) => {
   const dispatch = useDispatch();
   const selectedModels = useSelector(s => s.filters.modelsByMaker[maker] || '');
   const api = useAxios();
-  const modelsQuery = useQuery(
+  const query = useQuery(
     ['models', maker],
     () => api.get('filters/models', { params: { maker } }),
     { enabled, keepPreviousData: true }
   );
 
-  const models = modelsQuery?.data?.data ?? [];
+  const models = query?.data?.data ?? [];
 
-  return modelsQuery.isSuccess ? (
+  return query.isSuccess ? (
     <HStack flexWrap="wrap" space="2">
       {models.map((model) => (
         <Button
           key={model.name}
           mb="2"
-          size="xs"
           variant={selectedModels.includes(model.name) ? 'solid' : 'outline'}
           onPress={() => dispatch(toggleModel({ model: model.name, maker }))}
           borderWidth="0.5"
           borderColor="muted.200"
+          size="sm"
         >
           {titleCaps(model.name)}
         </Button>
       ))}
     </HStack>
-  ) : <Text>{modelsQuery.status}</Text>;
+  ) : query.isLoading ? (
+    <Skeleton  />
+  ) : null;
 }
 
 export default memo(FiltersModel);

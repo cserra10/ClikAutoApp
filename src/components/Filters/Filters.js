@@ -16,7 +16,9 @@ const Filters = () => {
     { keepPreviousData: true },
   );
 
-  const [open, setOpen] = useState({});
+  const [open, setOpen] = useState({
+    makerModel: true
+  });
 
   const toggleOpen = (key) => () => {
     setOpen(prev => ({
@@ -33,7 +35,7 @@ const Filters = () => {
 
   const sections = filtersMetaQuery.isSuccess ? [
     {
-      id: 'makeModel',
+      id: 'makerModel',
       title: 'Make & Model',
       content: (
         <FilterMaker makers={metaFilters?.makers} />
@@ -59,7 +61,7 @@ const Filters = () => {
         <Box key={section.id}>
           <Pressable onPress={toggleOpen(section.id)}>
             {({ isPressed }) => (
-              <HStack alignItems="center" p="2" bgColor={ isPressed ? 'muted.100' : 'white'}>
+              <HStack alignItems="center" px="4" py="2" bgColor={ isPressed ? 'muted.100' : 'white'}>
                 <Text flex="1">{section.title}</Text>
                 <Icon
                   size="4"
@@ -71,7 +73,7 @@ const Filters = () => {
             )}
           </Pressable>
           <Collapsible collapsed={!open[section.id]}>
-            <Box px="2">
+            <Box px="4">
               {section.content}
             </Box>
           </Collapsible>

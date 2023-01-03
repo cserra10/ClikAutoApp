@@ -48,5 +48,6 @@ module.exports = {
     ],
     'react/jsx-props-no-spreading': 0,
     'react/no-unescaped-entities': 0,
+    'no-nested-ternary': 0,
   },
 };
