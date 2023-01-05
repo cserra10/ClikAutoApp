@@ -5,6 +5,7 @@ import { toggleValueFromString } from 'src/utils';
 const filtersSlice = createSlice({
   name: 'filters',
   initialState: {
+    sort: '',
     perPage: 4,
     search: '',
     makers: '',
